@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root-Me Badge</title>
+</head>
+<body>
+  <div id="thm-badge" role="button" tabindex="0" aria-label="user avatar">
+    
+    <div class="thm-avatar-outer">
+      <div class="thm-avatar"></div>
+    </div>
+    <div class="badge-user-details">
+        
+        <div class="title-wrapper">
+          <span class="user_name" id="name">...</span>
+          <div>
+            <img src="https://www.root-me.org/squelettes/img/pays/ru.svg" alt="Rank Icon" class="rank-icon" style=" width: 16px; height: 20px;">
+          </div>
+        </div>
+
+        <div class="details-wrapper">
+            <!-- RANK -->
+            <div class="details-icon-wrapper">
+            <img src="https://www.root-me.org/squelettes/img/classement.svg?1647504561" alt="Rank Icon" class="rank-icon" style=" width: 16px; height: 20px;">
+            <span id="ranking" class="details-text">...</span>
+          </div>
+
+          <!-- SCORE -->
+          <div class="details-icon-wrapper">
+            <img src="https://www.root-me.org/squelettes/img/valid.svg?1566650916" alt="Score Icon" class="rank-icon" style=" width: 16px; height: 20px;">
+            <span id="score" class="details-text">...</span>
+          </div>
+
+          <!-- CHALLENGES -->
+          <div class="details-icon-wrapper">
+            <img src="https://www.root-me.org/IMG/logo/rubon5.svg?1637496507" alt="Challenges Icon" class="rank-icon" style=" width: 16px; height: 20px;">
+            <span id="challenges" class="details-text">...</span>
+          </div>
+        </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    async function getData() {
+        try {
+            const response = await axios.get('http://localhost:3000/api/rootme/username'); // Change "username"
+            return response.data;
+        } catch (error) {
+            console.error(`Error fetching data: ${error.message}`);
+            return null;
+        }
+    }
+
+    (async () => {
+        const data = await getData();
+        if (data) {
+            document.getElementById("ranking").innerText = data.ranking;
+            document.getElementById("score").innerText = data.score;
+            document.getElementById("challenges").innerText = data.challenges;
+            document.getElementById("name").innerText = data.username;
+        }
+    })();
+</script>
+</body>
+</html>
+<style>
+    
+    body {
+      width: 329px;
+      height: 88px;
+      margin: 0;
+    }
+  
+
+    /* -------------- BLOCK BADGE -------------- */
+    #thm-badge {
+      width: 327px;
+      height: 84px;
+      background-image: url('./background.png');
+      background-size: cover;
+      object-fit: fill;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+
+    /* -------------- BLOCK AVATAR -------------- */
+    .thm-avatar-outer {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin-right: 0;
+      padding: 2px;
+      margin-left: 10px;
+    }
+
+    .thm-avatar {
+      background-image: url(./Root.png);
+      display: block;
+      width: 90px;
+      height: 90px;
+      float: left;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      border-radius: 50%;
+      box-sizing: content-box; /* Needed for border to stop changing image width*/
+      background-color: none;
+      object-fit: cover;
+    }
+
+
+  
+    /* -------------- BLOQUE ELEMENT -------------- */
+    .badge-user-details {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-left: -20px;
+    }
+
+    .details-icon-wrapper {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .details-text {
+        font-family: 'Ubuntu', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        color: #ffffff;
+        transform: rotate(0.2deg);
+    }
+
+    .details-wrapper {
+        display: flex;
+        gap: 8px;
+      }
+
+    /* -------------- BLOCK TITRE -------------- */
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .user_name {
+        font-family: 'Ubuntu', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: bold;
+  
+    
+        color: #f9f9fb;
+        transform: rotate(0.2deg);
+    
+        max-width: 135px;
+        text-overflow: ellipsis;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    /* ---------------------------------------------- */
+</style>
