@@ -21,8 +21,8 @@ This project displays a customizable badge with user data from the Root-Me platf
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/cedev-1/RootMe-Badge.git
+   cd RootMe-Badge
 
 2. Install dependencies for the backend:
    ```bash
